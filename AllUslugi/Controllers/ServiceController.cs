@@ -12,7 +12,7 @@ namespace AllUslugi.Controllers
 
         public IActionResult Index()
         {
-            return View(appealRepository.GetAll());//main str
+            return View(appealRepository.GetAll());
         }
 
         public ServiceController(IAppealRepository appealRepos)
