@@ -1,0 +1,47 @@
+﻿@model IEnumerable<AllUslugi.Models.Apeal>
+@{
+    ViewData["Title"] = "Мои обращения";
+}
+
+<div class="container mt-4">
+    <h2>Обращения во всёуслугах</h2>
+
+    <a asp-action="AddService" class="btn btn-success mb-3">Добавить обращение</a>
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Название</th>
+                <th>Текст</th>
+                <th>Дата</th>
+                <th>Статус</th>
+                <th>Оценка</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Text</td>
+                    <td>@item.Date.ToShortDateString()</td>
+                    <td>@item.Status</td>
+                    <td>
+                        <form asp-action="ChangeRating" method="post">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-sm btn-info">@item.Rating</button>
+                        </form>
+                    </td>
+                    <td>
+                        <a asp-action="AddService" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Ред</a>
+                        <form asp-action="Delete" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Удалить?')">Уд</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

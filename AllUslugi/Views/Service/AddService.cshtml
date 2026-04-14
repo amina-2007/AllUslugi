@@ -1,0 +1,62 @@
+﻿@model AllUslugi.Models.Apeal
+@{
+    ViewData["Title"] = Model.Id == 0 ? "Новое обращение" : "Редактирование";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>@ViewData["Title"]</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="AddService" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="Rating" value="OK" />
+                         
+                        <div class="mb-3">
+                            <label asp-for="Title" class="form-label">Название</label>
+                            <select asp-for="Title" class="form-select">
+                                <option value="">-- Выберите --</option>
+                                @foreach (var t in ViewBag.Titles)
+                                {
+                                    <option value="@t">@t</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                         
+                        <div class="mb-3">
+                            <label asp-for="Text" class="form-label">Текст (до 30 символов)</label>
+                            <input asp-for="Text" class="form-control" maxlength="30" />
+                            <span asp-validation-for="Text" class="text-danger"></span>
+                        </div>
+                         
+                        <div class="mb-3">
+                            <label asp-for="Date" class="form-label">Дата</label>
+                            <input asp-for="Date" class="form-control" type="date" />
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+                         
+                        <div class="mb-3">
+                            <label asp-for="Status" class="form-label">Статус</label>
+                            <select asp-for="Status" class="form-select">
+                                <option value="">-- Выберите --</option>
+                                @foreach (var s in ViewBag.Statuses)
+                                {
+                                    <option value="@s">@s</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
+
+                        <hr />
+                        <button type="submit" class="btn btn-success">Сохранить</button>
+                        <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

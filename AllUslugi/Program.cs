@@ -1,3 +1,5 @@
+using AllUslugi.Services;
+
 namespace AllUslugi
 {
     public class Program
@@ -8,6 +10,7 @@ namespace AllUslugi
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSingleton<IAppealRepository, AppealRepository>();
 
             var app = builder.Build();
 
